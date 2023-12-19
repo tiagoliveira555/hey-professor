@@ -10,10 +10,7 @@ class LikeController extends Controller
 {
     public function __invoke(Question $question): RedirectResponse
     {
-        /** @var User $user */
-        $user = auth()->user();
-
-        $user->like($question);
+        user()->like($question);
 
         return back();
     }
