@@ -14,14 +14,4 @@ class Question extends Model
     {
         return $this->hasMany(Vote::class);
     }
-
-    public function likes(): int
-    {
-        return $this->votes()->sum('like');
-    }
-
-    public function unlikes(): int
-    {
-        return $this->votes()->sum('unlike');
-    }
 }
