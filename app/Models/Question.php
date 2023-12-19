@@ -10,7 +10,6 @@ class Question extends Model
 {
     use HasFactory;
 
-    /** @return HasMany<Vote> */
     public function votes(): HasMany
     {
         return $this->hasMany(Vote::class);
