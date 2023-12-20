@@ -11,5 +11,7 @@
                 <x-question :question="$item" />
             @endforeach
         </div>
+
+        {{ $questions->links() }}
     </x-container>
 </x-app-layout>
