@@ -28,7 +28,7 @@ it('should paginate the result', function () {
     get(route('dashboard'))->assertViewHas('questions', fn ($value) => $value instanceof LengthAwarePaginator);
 });
 
-it('should order by like and unlike, most liked question should be at the top, most unlike questions should be in the bottom', function () {
+it('should order by like and unlike with most liked question at the top and with most unlike questions in the bottom', function () {
     $user       = User::factory()->create();
     $secondUser = User::factory()->create();
     Question::factory()->count(5)->create();
