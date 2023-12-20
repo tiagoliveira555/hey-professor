@@ -14,6 +14,6 @@ class PublishController extends Controller
 
         $question->update(['draft' => false]);
 
-        return to_route('dashboard');
+        return back();
     }
 }
