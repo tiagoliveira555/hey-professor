@@ -1,6 +1,6 @@
 @props(['action', 'post' => null, 'put' => null, 'patch' => null, 'delete' => null])
 
-<form action="{{ $action }}" method="POST">
+<form {{ $attributes }} action="{{ $action }}" method="POST">
     @csrf
     @if ($put)
         @method('PUT')

@@ -12,7 +12,8 @@ class QuestionController extends Controller
     public function index(): View
     {
         return view('question.index', [
-            'questions' => user()->questions,
+            'questions'         => user()->questions,
+            'archivedQuestions' => user()->questions()->onlyTrashed()->get(),
         ]);
     }
 
@@ -50,9 +51,7 @@ class QuestionController extends Controller
         $this->authorize('update', $question);
 
         request()->validate([
-            'question' => [
-                'required',
-                'min:10',
+            'question' => ['required', 'min:10',
                 function (string $attribute, mixed $value, Closure $fail) {
                     if (substr($value, -1) !== '?') {
                         $fail('Are you sure that is question? It is missing the question mark in the end');
@@ -61,17 +60,33 @@ class QuestionController extends Controller
             ],
         ]);
 
-        $question->question = request()->question;
-        $question->save();
+        $question->update(['question' => request()->question]);
 
         return to_route('question.index');
+    }
+
+    public function archive(Question $question): RedirectResponse
+    {
+        $this->authorize('archive', $question);
+
+        $question->delete();
+
+        return back();
+    }
+
+    public function restore(int $id): RedirectResponse
+    {
+        $question = Question::withTrashed()->findOrFail($id);
+        $question->restore();
+
+        return back();
     }
 
     public function destroy(Question $question): RedirectResponse
     {
         $this->authorize('destroy', $question);
 
-        $question->delete();
+        $question->forceDelete();
 
         return back();
     }
