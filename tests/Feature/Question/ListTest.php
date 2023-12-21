@@ -38,7 +38,7 @@ it('should paginate the result', function () {
 it('should order by like and unlike with most liked question at the top and with most unlike questions in the bottom', function () {
     $user       = User::factory()->create();
     $secondUser = User::factory()->create();
-    Question::factory()->count(5)->create();
+    Question::factory()->count(5)->create(['draft' => false]);
 
     $mostLikedQuestion  = Question::find(3);
     $mostUnlikeQuestion = Question::find(1);
