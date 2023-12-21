@@ -1,17 +1,30 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
+        <x-header>
+            {{ __('Vote for a question') }}
+        </x-header>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("You're logged in!") }}
+    <x-container>
+        <form action="{{ route('dashboard') }}" method="get" class="flex items-center gap-2">
+            <x-text-input type="text" name="search" value="{{ request()->search }}" class="w-full" />
+            <x-btn.primary>Search</x-btn.primary>
+        </form>
+        @if ($questions->isEmpty())
+            <div class="flex flex-col items-center justify-center text-center dark:text-gray-300">
+                <div>
+                    <x-draw.searching width="300" />
                 </div>
+                <h2 class="mt-6 text-2xl font-bold dark:text-gray-400">Question not found</h2>
             </div>
-        </div>
-    </div>
+        @else
+            <div class="mt-6 space-y-4 dark:text-gray-400">
+                @foreach ($questions as $item)
+                    <x-question :question="$item" />
+                @endforeach
+            </div>
+
+            {{ $questions->withQueryString()->links() }}
+        @endif
+    </x-container>
 </x-app-layout>
