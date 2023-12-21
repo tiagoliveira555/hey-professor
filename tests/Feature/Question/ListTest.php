@@ -5,17 +5,24 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 use function Pest\Laravel\{actingAs, get};
 
-it('should list all the questions', function () {
-    $user      = User::factory()->create();
-    $questions = Question::factory()->count(5)->create();
+it('should only be listed to questions that have been published', function () {
+    $user = User::factory()->create();
+
+    $publishedQuestions = Question::factory()->count(5)->create(['draft' => false]);
+    $draftQuestions     = Question::factory()->count(5)->create(['draft' => true]);
 
     actingAs($user);
 
     $response = get(route('dashboard'));
 
     /** @var Question $q */
-    foreach ($questions as $q) {
+    foreach ($publishedQuestions as $q) {
         $response->assertSee($q->question);
+    }
+
+    /** @var Question $q */
+    foreach ($draftQuestions as $q) {
+        $response->assertDontSee($q->question);
     }
 });
 
@@ -31,7 +38,7 @@ it('should paginate the result', function () {
 it('should order by like and unlike with most liked question at the top and with most unlike questions in the bottom', function () {
     $user       = User::factory()->create();
     $secondUser = User::factory()->create();
-    Question::factory()->count(5)->create();
+    Question::factory()->count(5)->create(['draft' => false]);
 
     $mostLikedQuestion  = Question::find(3);
     $mostUnlikeQuestion = Question::find(1);
