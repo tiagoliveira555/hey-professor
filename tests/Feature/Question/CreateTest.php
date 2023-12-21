@@ -68,9 +68,9 @@ it('question should be unique', function () {
     $user = User::factory()->create();
     actingAs($user);
 
-    Question::factory()->create(['question' => 'Some Question?']);
+    Question::factory()->create(['question' => 'Same Question?']);
 
     post(route('question.store'), [
-        'question' => 'Some Question?',
+        'question' => 'Same Question?',
     ])->assertSessionHasErrors(['question' => 'Question already exists']);
 });
