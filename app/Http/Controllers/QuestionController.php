@@ -73,6 +73,14 @@ class QuestionController extends Controller
         return back();
     }
 
+    public function restore(int $id): RedirectResponse
+    {
+        $question = Question::withTrashed()->findOrFail($id);
+        $question->restore();
+
+        return back();
+    }
+
     public function destroy(Question $question): RedirectResponse
     {
         $this->authorize('destroy', $question);
