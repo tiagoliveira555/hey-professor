@@ -12,6 +12,6 @@
             @endforeach
         </div>
 
-        {{ $questions->links() }}
+        {{ $questions->withQueryString()->links() }}
     </x-container>
 </x-app-layout>
