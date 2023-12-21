@@ -14,7 +14,7 @@ class Question extends Model
     use Prunable;
 
     protected $casts = [
-        'draft' => 'boolean',
+        'draft' => 'bool',
     ];
 
     public function votes(): HasMany
