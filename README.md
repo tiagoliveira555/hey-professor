@@ -4,7 +4,7 @@
 
 Projeto desenvolvido durante as aulas da Pinguim Academy.
 
-<img src="https://github.com/tiagoliveira555/hey-professor/blob/main/public/hey-professor.png" alt="Logo">
+<img src="https://github.com/tiagoliveira555/hey-professor/blob/developer/public/hey-professor.png" alt="logo">
 
 ## ✨ Tecnologias
 
