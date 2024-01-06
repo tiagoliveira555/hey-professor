@@ -4,7 +4,7 @@
 
 Projeto desenvolvido durante as aulas da Pinguim Academy.
 
-<img src="https://github.com/tiagoliveira555/hey-professor/blob/main/public/hey-professor.png" alt="Logo">
+<img src="https://github.com/tiagoliveira555/hey-professor/blob/develop/public/hey-professor.png" alt="logo">
 
 ## ✨ Tecnologias
 
@@ -13,6 +13,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - [Laravel](https://laravel.com)
 - [Tailwind CSS](https://tailwindcss.com)
 - [MySQL](https://www.mysql.com)
+- [Pest](https://pestphp.com)
 
 ## 💻 Projeto
 
